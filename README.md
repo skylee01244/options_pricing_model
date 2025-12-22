@@ -1,15 +1,15 @@
-# options_pricing_model
+# Black-Scholes options pricing model
 
 A high-performance, stateless C++20 implementation of the Black-Scholes model. 
 This engine calculates theoretical option premiums, first-order Greeks and second-order Greeks.  
 It includes a Put-Call Parity validation suite to ensure arbitrage-free pricing logic.
 
 ### Key C++ Features (C++ 20)
-- std::optional<T> for Type safety to return std::nullopt if Greeks were invalid. Don't want to return 0.0 theta that would be VERY misleading.
-- Stateless architecture is implemented via static methods to minimize memory overhead and not use object instantiation costs everytime.
+- **std::optional<T>** for Type safety to return std::nullopt if Greeks were invalid. Don't want to return 0.0 theta that would be VERY misleading.
+- **Stateless architecture** is implemented via static methods to minimize memory overhead and not use object instantiation costs everytime.
 - Utilises <numbers> and compile time constants.
 
-Assumptions:
+**Assumptions**:
 1. European Exercise
 2. Geometric Brownian Motion
 3. Frictionless Market
@@ -17,7 +17,7 @@ Assumptions:
 5. No Arbitrage
 
 Note.
-- std::erf is expensive probably can be replaced with approximation functions (like Abramowitz & Stegun approximation), however wanted to use std::erf as it is accurate and I have never used it before.
+- **std::erf** is expensive probably can be replaced with approximation functions (like Abramowitz & Stegun approximation), however wanted to use std::erf as it is accurate and I have never used it before.
 - Scaled Vega and Rho by 0.01 - (change per 1% vol)
 - Scaled Theta by 1/365 - (1 day time decay)
 
