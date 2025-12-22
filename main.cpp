@@ -1,4 +1,5 @@
 #include <iostream>
+#include <optional>
 #include "Headers/Option.h"
 #include "Headers/BlackScholes.h"
 
@@ -13,22 +14,26 @@ int main() {
     Option putOption(100.0, 1.0, OptionType::Put);
 
     // Calculation
-    Greeks callGreeks = BlackScholes::calculate(callOption, S, r, sigma);
-    Greeks putGreeks = BlackScholes::calculate(putOption, S, r, sigma);
+    std::optional<Greeks> callGreeks = BlackScholes::calculate(callOption, S, r, sigma);
+    std::optional<Greeks> putGreeks = BlackScholes::calculate(putOption, S, r, sigma);
 
-    std::cout << "European Call Option Price: " << callGreeks.premium
-              << ", Delta: " << callGreeks.delta
-              << ", Gamma: " << callGreeks.gamma
-              << ", Vega: " << callGreeks.vega
-              << ", Theta: " << callGreeks.theta
-              << ", Rho: " << callGreeks.rho << std::endl;
+    if(callGreeks) {
+        std::cout << "European Call Option Price: " << callGreeks->premium
+                  << ", Delta: " << callGreeks->delta
+                  << ", Gamma: " << callGreeks->gamma
+                  << ", Vega: " << callGreeks->vega
+                  << ", Theta: " << callGreeks->theta
+                  << ", Rho: " << callGreeks->rho << std::endl;
+    }
 
-    std::cout << "European Put Option Price: " << putGreeks.premium
-              << ", Delta: " << putGreeks.delta
-              << ", Gamma: " << putGreeks.gamma
-              << ", Vega: " << putGreeks.vega
-              << ", Theta: " << putGreeks.theta
-              << ", Rho: " << putGreeks.rho << std::endl;
+    if(putGreeks) {
+        std::cout << "European Put Option Price: " << putGreeks->premium
+                  << ", Delta: " << putGreeks->delta
+                  << ", Gamma: " << putGreeks->gamma
+                  << ", Vega: " << putGreeks->vega
+                  << ", Theta: " << putGreeks->theta
+                  << ", Rho: " << putGreeks->rho << std::endl;
+    }
 
     return 0;
 }

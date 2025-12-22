@@ -2,6 +2,7 @@
 #include <cmath>
 #include <algorithm>
 #include <numbers>
+#include <optional>
 
 double BlackScholes::normalPDF(double x) {
     return (1.0 / std::sqrt(2.0 * std::numbers::pi)) * std::exp(-0.5 * x * x);
@@ -11,7 +12,7 @@ double BlackScholes::normalCDF(double x) {
     return 0.5 * (1.0 + std::erf(x / std::sqrt(2.0)));
 }
 
-Greeks BlackScholes::calculate(const Option& option, double S, double r, double sigma) {
+std::optional<Greeks> BlackScholes::calculate(const Option& option, double S, double r, double sigma) {
     double K = option.getStrike();
     double T = option.getTimeToExpiry();
     OptionType type = option.getType();
@@ -24,11 +25,11 @@ Greeks BlackScholes::calculate(const Option& option, double S, double r, double 
             intrinsic = std::max(0.0, K - S);
 
         // Return zero for all Greeks at expiration
-        return {intrinsic, 0.0, 0.0, 0.0, 0.0, 0.0};
+        return std::nullopt;
     }
     if (S <= 0 || K <= 0 || sigma < 0) {
         // NaN
-        return {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+        return std::nullopt;
     }
 
 

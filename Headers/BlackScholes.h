@@ -1,4 +1,5 @@
 #pragma once
+#include <optional>
 #include "Greeks.h"
 #include "Option.h"
 
@@ -10,7 +11,7 @@ private:
     static constexpr double DAYS_IN_YEAR = 365.2425;
 
 public:
-    [[nodiscard]] static Greeks calculate(const Option& option, double spotPrice, double riskFreeRate, double volatility);
+    [[nodiscard]] static std::optional<Greeks> calculate(const Option& option, double spotPrice, double riskFreeRate, double volatility);
 
 
 };
