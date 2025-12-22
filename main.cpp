@@ -2,6 +2,7 @@
 #include <optional>
 #include "Headers/Option.h"
 #include "Headers/BlackScholes.h"
+#include "Tests/ParityTest.h"
 
 int main() {
 
@@ -33,6 +34,10 @@ int main() {
                   << ", Vega: " << putGreeks->vega
                   << ", Theta: " << putGreeks->theta
                   << ", Rho: " << putGreeks->rho << std::endl;
+    }
+
+    if (callGreeks && putGreeks) {
+        checkPutCallParity(*callGreeks, *putGreeks, callOption, S, r);
     }
 
     return 0;

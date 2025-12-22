@@ -8,6 +8,8 @@ add_executable(options_pricing_model
         main.cpp
         BlackScholes.cpp
         Option.cpp
+        Tests/ParityTest.h
+        Tests/ParityTest.cpp
 )
 
 target_include_directories(options_pricing_model PRIVATE ${CMAKE_SOURCE_DIR}/Headers)
