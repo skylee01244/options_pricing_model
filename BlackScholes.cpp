@@ -63,5 +63,5 @@ Greeks BlackScholes::calculate(const Option& option, double S, double r, double 
         g.theta = (double)(-(S * normalPDF(d1) * sigma) / (2 * sqrtT) + r * K * exp_rT * cdf_neg_d2) / DAYS_IN_YEAR; // DAYS_IN_YEAR;
     }
 
-    return greeks;
+    return g;
 }
